@@ -1,6 +1,6 @@
 AC_PREREQ(2.59)
-AC_INIT(hda-emu.c)
-AM_INIT_AUTOMAKE(hda-emu, 0.2.6)
+AC_INIT(hda-emu.c, 0.2.6)
+AM_INIT_AUTOMAKE
 
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
@@ -615,6 +615,14 @@ else
 fi
 if test "$NEW_JACK_API" = "1"; then
   AC_DEFINE(NEW_JACK_API)
+fi
+
+AC_MSG_CHECKING(for HDMI chmap helper)
+if test -f dist/sound/hda/hdmi_chmap.c; then
+  AC_MSG_RESULT(yes)
+  AC_DEFINE(HAVE_HDMI_CHMAP)
+else
+  AC_MSG_RESULT(no)
 fi
 
 AC_OUTPUT(Makefile lib/Makefile kernel/Makefile include/Makefile)
